@@ -1,0 +1,38 @@
+// C++ program for implementation of 
+// above approach
+#include<bits/stdc++.h>
+using namespace std;
+ 
+// Function to print required answer
+void pClosest(vector<vector<int>> pts, int k)
+{
+     
+    // In multimap values gets
+    // automatically sorted based on
+    // their keys which is distance here
+    multimap<int, int> mp;
+    for(int i = 0; i < pts.size(); i++)
+    {
+        int x = pts[i][0], y = pts[i][1];
+        mp.insert({(x * x) + (y * y) , i});
+    }
+     
+    for(auto it = mp.begin();
+             it != mp.end() && k > 0;
+             it++, k--)
+        cout << "[" << pts[it->second][0] << ", "
+             << pts[it->second][1] << "]" << "\n";
+}
+ 
+// Driver code
+int main()
+{
+    vector<vector<int>> points = { { 3, 3 },
+                                   { 5, -1 },
+                                   { -2, 4 } };
+     
+    int K = 2;
+     
+    pClosest(points, K);
+    return 0;
+}
